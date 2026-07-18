@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Verified Election Affidavit & Transparency Dashboard for Prashant Kishor (PK) - Jan Suraaj Initiative.",
   "type": "module",
-  "homepage": "https://Spiderplant7450.github.io/Prashant-Kishor---Jan-Suraaj-Dashboard",
+  "homepage": "https://spiderplant7450.github.io/Prashant-Kishor-Jan-Suraaj-Dashboard/",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",

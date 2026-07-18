@@ -13,12 +13,15 @@ export default function App() {
   const [activeTab, setActiveTab] = useState("overview");
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] flex flex-col font-sans selection:bg-saffron/20 selection:text-brand-navy border-8 border-saffron" id="root-app">
+    <div className="min-h-screen bg-[#F8F9FA] flex flex-col font-sans selection:bg-saffron/20 selection:text-brand-navy" id="root-app">
+      {/* Fixed global border overlay */}
+      <div className="fixed inset-0 border-8 border-saffron pointer-events-none z-[100]"></div>
+      
       {/* Sticky Header Component */}
       <Header activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* Hero Section */}
-      <HeroSection />
+      <HeroSection setActiveTab={setActiveTab} />
 
       {/* Main Core Metric Counters */}
       <StatGrid />
@@ -109,13 +112,31 @@ export default function App() {
                   <p className="text-[9px] text-slate-400 font-black font-sans uppercase tracking-widest">Quick Deep-Dive links</p>
                   <div className="flex flex-wrap gap-2">
                     <button
-                      onClick={() => setActiveTab("journey")}
+                      onClick={() => {
+                        setActiveTab("journey");
+                        setTimeout(() => {
+                          const container = document.getElementById("affidavit-tabs-container");
+                          if (container) {
+                            const y = container.getBoundingClientRect().top + window.scrollY - 100;
+                            window.scrollTo({ top: y, behavior: "smooth" });
+                          }
+                        }, 50);
+                      }}
                       className="px-3.5 py-2 bg-saffron text-white text-[10px] font-black uppercase tracking-wider hover:bg-saffron-dark transition-colors border-2 border-brand-navy shadow-sm cursor-pointer"
                     >
                       Campaign History
                     </button>
                     <button
-                      onClick={() => setActiveTab("assets")}
+                      onClick={() => {
+                        setActiveTab("assets");
+                        setTimeout(() => {
+                          const container = document.getElementById("affidavit-tabs-container");
+                          if (container) {
+                            const y = container.getBoundingClientRect().top + window.scrollY - 100;
+                            window.scrollTo({ top: y, behavior: "smooth" });
+                          }
+                        }, 50);
+                      }}
                       className="px-3.5 py-2 bg-party-green text-white text-[10px] font-black uppercase tracking-wider hover:bg-party-green-dark transition-colors border-2 border-brand-navy shadow-sm cursor-pointer"
                     >
                       Audit Ledger

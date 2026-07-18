@@ -4,7 +4,7 @@ import { PROFILE } from "../data";
 import portraitImg from "../assets/images/prashant_kishor_portrait_1784401916436.jpg";
 import { PartyLogo, SchoolBagLogo } from "./Logos";
 
-export default function HeroSection() {
+export default function HeroSection({ setActiveTab }: { setActiveTab: (tab: string) => void }) {
   return (
     <section className="relative overflow-hidden bg-[#F8F9FA] py-12 border-b-4 border-brand-navy" id="profile-hero">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -108,18 +108,23 @@ export default function HeroSection() {
                 <p className="text-xs font-black text-brand-navy leading-tight">VERIFIED ELECTION COMMISSION AFFIDAVIT</p>
                 <p className="text-[10px] text-slate-600 leading-normal">Filed before returning officer in Patna on 13th July 2026 for the State Elections.</p>
               </div>
-              <a
-                href="#profile-hero"
+              <button
                 onClick={(e) => {
                   e.preventDefault();
-                  const target = document.getElementById("affidavit-tabs-container");
-                  if (target) target.scrollIntoView({ behavior: "smooth" });
+                  setActiveTab("assets");
+                  setTimeout(() => {
+                    const target = document.getElementById("affidavit-tabs-container");
+                    if (target) {
+                      const y = target.getBoundingClientRect().top + window.scrollY - 100;
+                      window.scrollTo({ top: y, behavior: "smooth" });
+                    }
+                  }, 50);
                 }}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-party-green hover:bg-party-green-dark text-white text-xs font-black uppercase tracking-wider transition-colors border border-brand-navy shrink-0"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-party-green hover:bg-party-green-dark text-white text-xs font-black uppercase tracking-wider transition-colors border border-brand-navy shrink-0 cursor-pointer"
               >
                 <FileText className="w-3.5 h-3.5" />
                 Browse Affidavit Assets
-              </a>
+              </button>
             </div>
           </div>
         </div>

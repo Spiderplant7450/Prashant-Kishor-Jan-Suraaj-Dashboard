@@ -21,12 +21,8 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm" id="main-header">
-      {/* Tricolor Indicator Bar representing Jan Suraaj party colors */}
-      <div className="w-full h-1.5 flex" id="party-tricolor-bar">
-        <div className="bg-saffron flex-1 h-full"></div>
-        <div className="bg-white flex-1 h-full"></div>
-        <div className="bg-party-green flex-1 h-full"></div>
-      </div>
+      {/* Top Saffron Bar */}
+      <div className="w-full h-1.5 bg-saffron" id="party-tricolor-bar"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -53,7 +49,16 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
                 <button
                   key={tab.id}
                   id={`nav-tab-${tab.id}`}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => {
+                    setActiveTab(tab.id);
+                    setTimeout(() => {
+                      const container = document.getElementById("affidavit-tabs-container");
+                      if (container) {
+                        const y = container.getBoundingClientRect().top + window.scrollY - 100;
+                        window.scrollTo({ top: y, behavior: "smooth" });
+                      }
+                    }, 50);
+                  }}
                   className={`flex items-center gap-2 px-3.5 py-2 text-xs font-black uppercase tracking-wider transition-all duration-150 border-2 ${
                     isActive
                       ? "bg-brand-navy text-white border-brand-navy font-black shadow-sm"
@@ -100,7 +105,16 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
               <button
                 key={tab.id}
                 id={`mobile-nav-tab-${tab.id}`}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => {
+                  setActiveTab(tab.id);
+                  setTimeout(() => {
+                    const container = document.getElementById("affidavit-tabs-container");
+                    if (container) {
+                      const y = container.getBoundingClientRect().top + window.scrollY - 130;
+                      window.scrollTo({ top: y, behavior: "smooth" });
+                    }
+                  }, 50);
+                }}
                 className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-black uppercase tracking-wider whitespace-nowrap transition-all border-2 ${
                   isActive
                     ? "bg-brand-navy text-white border-brand-navy shadow-sm"
