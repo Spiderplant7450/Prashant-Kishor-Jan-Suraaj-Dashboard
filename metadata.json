@@ -1,0 +1,6 @@
+{
+  "name": "Prashant Kishor - Jan Suraaj Dashboard",
+  "description": "The official, verified election affidavit and transparency portal of Prashant Kishor (PK), showcasing his wealth assets, liabilities, real estate holdings, education, and social contributions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
