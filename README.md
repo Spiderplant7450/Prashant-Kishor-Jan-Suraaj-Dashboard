@@ -1,6 +1,6 @@
 # Prashant Kishor (PK) - Verified Election Affidavit & Transparency Dashboard
 
-An interactive, public transparency portal showcasing the verified election affidavit and comprehensive financial, asset, and educational disclosures of **Prashant Kishor (PK)**, leader and organiser of the **Jan Suraaj Party** for the Bihar Assembly Elections.
+An interactive, public transparency portal showcasing the verified election affidavit and comprehensive financial, asset, and educational disclosures of **Prashant Kishor (PK)**, leader and organizer of the **Jan Suraaj Party** for the Bihar Assembly Elections.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Vite](https://img.shields.io/badge/Vite-6.x-blue?style=flat&logo=vite)](https://vite.dev/)

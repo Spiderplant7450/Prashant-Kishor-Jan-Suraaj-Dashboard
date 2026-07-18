@@ -26,11 +26,15 @@ export default function AffidavitFlipbook() {
   const flipBook = useRef<any>(null);
 
   const prevPage = () => {
-    flipBook.current.pageFlip().flipPrev();
+    if (flipBook.current) {
+      flipBook.current.pageFlip().flipPrev();
+    }
   };
 
   const nextPage = () => {
-    flipBook.current.pageFlip().flipNext();
+    if (flipBook.current) {
+      flipBook.current.pageFlip().flipNext();
+    }
   };
 
   return (
