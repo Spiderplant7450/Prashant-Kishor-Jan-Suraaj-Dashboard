@@ -17,6 +17,7 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
     { id: "properties", label: "Real Estate Portfolio", icon: FileText },
     { id: "education", label: "Academic Journey", icon: Award },
     { id: "legal", label: "Legal Transparency", icon: ShieldAlert },
+    { id: "affidavit", label: "Affidavit Flipbook", icon: FileText },
   ];
 
   return (
