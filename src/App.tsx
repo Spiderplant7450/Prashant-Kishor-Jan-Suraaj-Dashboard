@@ -7,7 +7,6 @@ import FinancialDashboard from "./components/FinancialDashboard";
 import RealEstateGrid from "./components/RealEstateGrid";
 import EducationTimeline from "./components/EducationTimeline";
 import LegalTransparency from "./components/LegalTransparency";
-import AffidavitFlipbook from "./components/AffidavitFlipbook";
 import { Sparkles, HelpCircle, AlertCircle, TrendingUp, Flag, MapPin, Landmark } from "lucide-react";
 
 export default function App() {
@@ -177,7 +176,6 @@ export default function App() {
         {activeTab === "properties" && <RealEstateGrid />}
         {activeTab === "education" && <EducationTimeline />}
         {activeTab === "legal" && <LegalTransparency />}
-        {activeTab === "affidavit" && <AffidavitFlipbook />}
       </main>
 
       {/* Footer tricolor style */}
