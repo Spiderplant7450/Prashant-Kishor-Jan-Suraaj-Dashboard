@@ -61,58 +61,18 @@ This will compile the static assets cleanly into the `dist/` directory.
 
 ## 🌐 Publishing to GitHub Pages
 
-This app is pre-configured for seamless publication to GitHub Pages.
+This app is configured to automatically deploy to GitHub Pages directly from the `main` branch using GitHub Actions, without requiring a separate `gh-pages` branch.
 
-### Method 1: Easy One-Step Deployment (Recommended)
+### Automatic Deployment using GitHub Actions
 
-1. Make sure your local repository is connected to your GitHub remote.
-2. Run the deployment script:
-   ```bash
-   npm run deploy
-   ```
-   *This automatically triggers `npm run build` first, then packages and pushes the compiled files in `dist/` to a dedicated `gh-pages` branch on your GitHub repository.*
+Every time you push code to the `main` branch, the pre-configured workflow will automatically build your site and deploy it.
 
-3. Go to your repository settings on GitHub, navigate to **Pages**, and ensure the source is set to deploy from the `gh-pages` branch. Your site will be live at:
-   `https://<username>.github.io/Prashant-Kishor---Jan-Suraaj-Dashboard/`
-
----
-
-### Method 2: Automatic Deployment using GitHub Actions
-
-You can automate deployment so that every time you push code to the `main` branch, it automatically deploys to GitHub Pages.
-
-Create a file named `.github/workflows/deploy.yml` in your repository with the following contents:
-
-```yaml
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches:
-      - main  # Trigger deployment on pushing to main branch
-
-permissions:
-  contents: write
-
-jobs:
-  build-and-deploy:
-    concurrency: ci-${{ github.ref }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v4
-
-      - name: Install and Build 🔧
-        run: |
-          npm ci
-          npm run build
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: dist # The folder the action should deploy.
-          branch: gh-pages # The branch the action should deploy to.
-```
+1. The configuration is already present in `.github/workflows/deploy.yml`.
+2. Push your changes to the `main` branch.
+3. Go to your repository settings on GitHub, navigate to **Pages**.
+4. Under **Build and deployment**, ensure the **Source** is set to **GitHub Actions**.
+5. Your site will be automatically built and live at:
+   `https://Spiderplant7450.github.io/Prashant-Kishor---Jan-Suraaj-Dashboard/`
 
 ---
 
