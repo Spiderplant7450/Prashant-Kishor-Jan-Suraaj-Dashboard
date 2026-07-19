@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import HTMLFlipBook from 'react-pageflip';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // NOTE: react-pageflip works best with image files for pages.
@@ -6,7 +7,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 // and place them in the public/ folder.
 const pages = Array.from({ length: 21 }, (_, i) => ({
   id: i + 1,
-  src: `/Affidavit-1784401521_page-${String(i + 1).padStart(4, '0')}.jpg`,
+  src: `${import.meta.env.BASE_URL}Affidavit-1784401521_page-${String(i + 1).padStart(4, '0')}.jpg`,
 }));
 
 const Page = React.forwardRef<HTMLDivElement, { children: React.ReactNode; className?: string }>(
@@ -51,9 +52,26 @@ export default function AffidavitFlipbook() {
         </div>
         
         <div className="flex flex-col items-center gap-6">
-          <div className="text-center p-10 border-2 border-dashed border-gray-300">
-            Flipbook component temporarily disabled.
-          </div>
+          <HTMLFlipBook
+            width={400}
+            height={500}
+            size="fixed"
+            minWidth={300}
+            maxWidth={400}
+            minHeight={400}
+            maxHeight={500}
+            maxShadowOpacity={0.5}
+            showCover={true}
+            mobileScrollSupport={true}
+            ref={flipBook}
+            className="border shadow-2xl"
+          >
+            {pages.map((page) => (
+              <Page key={page.id}>
+                <img src={page.src} alt={`Affidavit Page ${page.id}`} className="w-full h-full object-contain bg-white" />
+              </Page>
+            ))}
+          </HTMLFlipBook>
 
           <div className="flex gap-4">
             <button 
