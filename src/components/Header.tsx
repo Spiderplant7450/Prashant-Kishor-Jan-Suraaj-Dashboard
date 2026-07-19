@@ -28,7 +28,7 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo Brand area */}
-          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setActiveTab("overview")}>
+          <div className="shrink-0 flex items-center space-x-3 cursor-pointer" onClick={() => setActiveTab("overview")}>
             <PartyLogo className="w-11 h-11 hover:scale-105 transition-transform duration-200" />
             <div>
               <h1 className="font-display font-black text-base lg:text-lg text-brand-navy leading-none tracking-tighter flex items-center gap-1.5 uppercase whitespace-nowrap">
@@ -42,7 +42,7 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
           </div>
 
           {/* Desktop Navigation links */}
-          <nav className="hidden xl:flex space-x-1" aria-label="Global" id="desktop-nav">
+          <nav className="hidden xl:flex flex-1 min-w-0 overflow-x-auto scrollbar-none mx-4 items-center space-x-1" aria-label="Global" id="desktop-nav">
             {tabs.map((tab) => {
               const IconComp = tab.icon;
               const isActive = activeTab === tab.id;
@@ -60,7 +60,7 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
                       }
                     }, 50);
                   }}
-                  className={`flex items-center gap-1.5 px-2 2xl:px-3 py-1.5 2xl:py-2 text-[10px] 2xl:text-xs font-black uppercase tracking-wider transition-all duration-150 border-2 whitespace-nowrap ${
+                  className={`shrink-0 flex items-center gap-1.5 px-2 2xl:px-3 py-1.5 2xl:py-2 text-[10px] 2xl:text-xs font-black uppercase tracking-wider transition-all duration-150 border-2 whitespace-nowrap ${
                     isActive
                       ? "bg-brand-navy text-white border-brand-navy font-black shadow-sm"
                       : "text-slate-600 border-transparent hover:text-brand-navy hover:bg-slate-100"
@@ -74,7 +74,7 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
           </nav>
 
           {/* Share Button */}
-          <div className="flex items-center space-x-2">
+          <div className="shrink-0 flex items-center space-x-2">
             <button
               onClick={() => {
                 navigator.clipboard.writeText(window.location.href);
@@ -116,7 +116,7 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
                     }
                   }, 50);
                 }}
-                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-black uppercase tracking-wider whitespace-nowrap transition-all border-2 ${
+                className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 text-xs font-black uppercase tracking-wider whitespace-nowrap transition-all border-2 ${
                   isActive
                     ? "bg-brand-navy text-white border-brand-navy shadow-sm"
                     : "bg-white text-slate-700 border-slate-200"
