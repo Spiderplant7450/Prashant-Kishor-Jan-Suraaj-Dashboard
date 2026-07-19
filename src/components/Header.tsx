@@ -9,6 +9,56 @@ interface HeaderProps {
 
 export default function Header({ activeTab, setActiveTab }: HeaderProps) {
   const [copied, setCopied] = React.useState(false);
+  const [lang, setLang] = React.useState('en');
+  const [scrollProgress, setScrollProgress] = React.useState(0);
+
+  React.useEffect(() => {
+    // Check google translate cookie
+    const match = document.cookie.match(/googtrans=\/en\/([a-z]{2})/);
+    if (match && match[1]) {
+      setLang(match[1]);
+    } else {
+      // Check if translation is active via the select element
+      const select = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+      if (select && select.value) {
+        setLang(select.value);
+      }
+    }
+
+    // Scroll Indicator Logic
+    const handleScroll = () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      setScrollProgress(scrolled);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // initial call
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const toggleLanguage = () => {
+    const newLang = lang === 'en' ? 'hi' : 'en';
+    setLang(newLang);
+    
+    // Clear old cookies just in case
+    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname};`;
+    
+    // Set the new cookie
+    document.cookie = `googtrans=/en/${newLang}; path=/`;
+    
+    // Trigger the actual translate widget to update immediately without reload
+    const select = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+    if (select) {
+      select.value = newLang;
+      select.dispatchEvent(new Event('change'));
+    } else {
+      // Fallback if widget hasn't loaded yet
+      window.location.reload();
+    }
+  };
 
   const tabs = [
     { id: "overview", label: "Profile Overview", icon: User },
@@ -22,8 +72,16 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm" id="main-header">
+      {/* Scroll Progress Bar at the very top */}
+      <div className="w-full h-1.5 bg-gray-200">
+        <div 
+          className="h-1.5 bg-party-green transition-all duration-150 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+      
       {/* Top Saffron Bar */}
-      <div className="w-full h-1.5 bg-saffron" id="party-tricolor-bar"></div>
+      <div className="w-full h-1 bg-saffron" id="party-tricolor-bar"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -73,8 +131,23 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
             })}
           </nav>
 
-          {/* Share Button */}
-          <div className="shrink-0 flex items-center space-x-2">
+          {/* Language Toggle and Share Button */}
+          <div className="shrink-0 flex items-center space-x-3">
+            {/* Language Switch */}
+            <div className="hidden xl:flex items-center gap-1.5 bg-gray-100 px-2 py-1 rounded-full border border-gray-200 notranslate">
+              <span className={`text-[9px] font-black uppercase ${lang === 'en' ? 'text-brand-navy' : 'text-gray-400'}`}>EN</span>
+              <button
+                onClick={toggleLanguage}
+                className={`relative inline-flex h-4 w-7 items-center rounded-full transition-colors focus:outline-none ${lang === 'hi' ? 'bg-saffron' : 'bg-gray-300'}`}
+                aria-label="Toggle Language"
+              >
+                <span
+                  className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${lang === 'hi' ? 'translate-x-3.5' : 'translate-x-0.5'}`}
+                />
+              </button>
+              <span className={`text-[9px] font-black uppercase ${lang === 'hi' ? 'text-brand-navy' : 'text-gray-400'}`}>हिन्दी</span>
+            </div>
+
             <button
               onClick={() => {
                 navigator.clipboard.writeText(window.location.href);
@@ -97,7 +170,22 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
       </div>
 
       {/* Mobile Navigation panel */}
-      <div className="xl:hidden flex overflow-x-auto py-2.5 px-4 bg-gray-50 border-t border-gray-200 scrollbar-none" id="mobile-nav">
+      <div className="xl:hidden flex items-center overflow-x-auto py-2.5 px-4 bg-gray-50 border-t border-gray-200 scrollbar-none" id="mobile-nav">
+        {/* Mobile Language Switch */}
+        <div className="flex xl:hidden shrink-0 items-center gap-1.5 bg-gray-100 px-2 py-1.5 rounded-full border border-gray-200 mr-3 notranslate">
+          <span className={`text-[10px] font-black uppercase ${lang === 'en' ? 'text-brand-navy' : 'text-gray-400'}`}>EN</span>
+          <button
+            onClick={toggleLanguage}
+            className={`relative inline-flex h-5 w-8 items-center rounded-full transition-colors focus:outline-none ${lang === 'hi' ? 'bg-saffron' : 'bg-gray-300'}`}
+            aria-label="Toggle Language"
+          >
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${lang === 'hi' ? 'translate-x-3.5' : 'translate-x-0.5'}`}
+            />
+          </button>
+          <span className={`text-[10px] font-black uppercase ${lang === 'hi' ? 'text-brand-navy' : 'text-gray-400'}`}>हिन्दी</span>
+        </div>
+
         <div className="flex space-x-2">
           {tabs.map((tab) => {
             const IconComp = tab.icon;
