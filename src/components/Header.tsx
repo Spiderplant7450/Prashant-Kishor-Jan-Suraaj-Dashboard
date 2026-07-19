@@ -72,14 +72,6 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm" id="main-header">
-      {/* Scroll Progress Bar at the very top */}
-      <div className="w-full h-1.5 bg-gray-200">
-        <div 
-          className="h-1.5 bg-party-green transition-all duration-150 ease-out"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
-      
       {/* Top Saffron Bar */}
       <div className="w-full h-1 bg-saffron" id="party-tricolor-bar"></div>
 
@@ -216,6 +208,14 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
             );
           })}
         </div>
+      </div>
+      
+      {/* Scroll Progress Bar at bottom of header */}
+      <div className="w-full h-1.5 bg-gray-200">
+        <div 
+          className="h-1.5 bg-[#04AA6D] transition-all duration-150 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
       </div>
     </header>
   );
