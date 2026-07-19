@@ -51,42 +51,61 @@ export default function AffidavitFlipbook() {
           </p>
         </div>
         
-        <div className="flex flex-col items-center gap-6">
-          <HTMLFlipBook
-            width={400}
-            height={500}
-            size="fixed"
-            minWidth={300}
-            maxWidth={400}
-            minHeight={400}
-            maxHeight={500}
-            maxShadowOpacity={0.5}
-            showCover={true}
-            mobileScrollSupport={true}
-            ref={flipBook}
-            className="border shadow-2xl"
+        <div className="flex flex-row items-center justify-center gap-2 sm:gap-8">
+          <button 
+            onClick={prevPage}
+            className="hidden sm:flex items-center justify-center w-12 h-12 bg-brand-navy text-white hover:bg-opacity-90 transition-all rounded-full shadow-lg shrink-0"
+            aria-label="Previous Page"
           >
-            {pages.map((page) => (
-              <Page key={page.id}>
-                <img src={page.src} alt={`Affidavit Page ${page.id}`} className="w-full h-full object-contain bg-white" />
-              </Page>
-            ))}
-          </HTMLFlipBook>
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          
+          <div className="flex flex-col items-center gap-6">
+            <HTMLFlipBook
+              width={400}
+              height={500}
+              size="fixed"
+              minWidth={300}
+              maxWidth={400}
+              minHeight={400}
+              maxHeight={500}
+              maxShadowOpacity={0.5}
+              showCover={true}
+              mobileScrollSupport={true}
+              ref={flipBook}
+              className="border shadow-2xl"
+            >
+              {pages.map((page) => (
+                <Page key={page.id}>
+                  <img src={page.src} alt={`Affidavit Page ${page.id}`} className="w-full h-full object-contain bg-white" />
+                </Page>
+              ))}
+            </HTMLFlipBook>
 
-          <div className="flex gap-4">
-            <button 
-              onClick={prevPage}
-              className="flex items-center gap-2 px-6 py-3 bg-brand-navy text-white font-black uppercase tracking-wider hover:bg-opacity-90 transition-all border-2 border-brand-navy cursor-pointer"
-            >
-              <ChevronLeft className="w-5 h-5" /> Previous
-            </button>
-            <button 
-              onClick={nextPage}
-              className="flex items-center gap-2 px-6 py-3 bg-saffron text-white font-black uppercase tracking-wider hover:bg-saffron-dark transition-all border-2 border-saffron cursor-pointer"
-            >
-              Next <ChevronRight className="w-5 h-5" />
-            </button>
+            {/* Mobile buttons */}
+            <div className="flex sm:hidden gap-4">
+              <button 
+                onClick={prevPage}
+                className="flex items-center gap-2 px-4 py-2 bg-brand-navy text-white font-black uppercase tracking-wider hover:bg-opacity-90 transition-all border-2 border-brand-navy cursor-pointer"
+              >
+                <ChevronLeft className="w-5 h-5" /> Prev
+              </button>
+              <button 
+                onClick={nextPage}
+                className="flex items-center gap-2 px-4 py-2 bg-saffron text-white font-black uppercase tracking-wider hover:bg-saffron-dark transition-all border-2 border-saffron cursor-pointer"
+              >
+                Next <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
+          
+          <button 
+            onClick={nextPage}
+            className="hidden sm:flex items-center justify-center w-12 h-12 bg-saffron text-white hover:bg-saffron-dark transition-all rounded-full shadow-lg shrink-0"
+            aria-label="Next Page"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
         </div>
       </div>
     </section>

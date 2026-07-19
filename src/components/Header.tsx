@@ -31,18 +31,18 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
           <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setActiveTab("overview")}>
             <PartyLogo className="w-11 h-11 hover:scale-105 transition-transform duration-200" />
             <div>
-              <h1 className="font-display font-black text-base text-brand-navy leading-none tracking-tighter flex items-center gap-1.5 uppercase">
+              <h1 className="font-display font-black text-base lg:text-lg text-brand-navy leading-none tracking-tighter flex items-center gap-1.5 uppercase whitespace-nowrap">
                 Prashant Kishor
                 <span className="hidden sm:inline-block bg-party-green text-white text-[9px] font-black px-2.5 py-0.5 rounded-none border border-party-green-dark">
                   Jan Suraaj
                 </span>
               </h1>
-              <p className="text-[9px] font-mono text-slate-500 font-bold tracking-widest uppercase mt-0.5">182-BANKIPUR CONSTITUENCY</p>
+              <p className="text-[9px] font-mono text-slate-500 font-bold tracking-widest uppercase mt-0.5 whitespace-nowrap">182-BANKIPUR CONSTITUENCY</p>
             </div>
           </div>
 
           {/* Desktop Navigation links */}
-          <nav className="hidden lg:flex space-x-1" aria-label="Global" id="desktop-nav">
+          <nav className="hidden xl:flex space-x-1" aria-label="Global" id="desktop-nav">
             {tabs.map((tab) => {
               const IconComp = tab.icon;
               const isActive = activeTab === tab.id;
@@ -60,7 +60,7 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
                       }
                     }, 50);
                   }}
-                  className={`flex items-center gap-2 px-3.5 py-2 text-xs font-black uppercase tracking-wider transition-all duration-150 border-2 ${
+                  className={`flex items-center gap-1.5 px-2 2xl:px-3 py-1.5 2xl:py-2 text-[10px] 2xl:text-xs font-black uppercase tracking-wider transition-all duration-150 border-2 whitespace-nowrap ${
                     isActive
                       ? "bg-brand-navy text-white border-brand-navy font-black shadow-sm"
                       : "text-slate-600 border-transparent hover:text-brand-navy hover:bg-slate-100"
@@ -81,7 +81,7 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
                 setCopied(true);
                 setTimeout(() => setCopied(false), 2000);
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 border-2 border-brand-navy text-xs font-black uppercase tracking-wider transition-colors shadow-sm cursor-pointer"
+              className="flex items-center gap-1.5 px-2 2xl:px-3 py-1.5 border-2 border-brand-navy text-[10px] 2xl:text-xs font-black uppercase tracking-wider transition-colors shadow-sm cursor-pointer whitespace-nowrap"
               style={{
                 backgroundColor: copied ? "var(--color-party-green)" : "var(--color-saffron)",
                 color: copied ? "#ffffff" : "var(--color-brand-navy)",
@@ -97,7 +97,7 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
       </div>
 
       {/* Mobile Navigation panel */}
-      <div className="lg:hidden flex overflow-x-auto py-2.5 px-4 bg-gray-50 border-t border-gray-200 scrollbar-none" id="mobile-nav">
+      <div className="xl:hidden flex overflow-x-auto py-2.5 px-4 bg-gray-50 border-t border-gray-200 scrollbar-none" id="mobile-nav">
         <div className="flex space-x-2">
           {tabs.map((tab) => {
             const IconComp = tab.icon;
